@@ -1,5 +1,4 @@
-﻿using GymManager.Application.Tickets.Queries.GetTicketById;
-using GymManager.UI.Models;
+﻿using GymManager.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -9,8 +8,8 @@ public class HomeController : BaseController
 {
     public async Task<IActionResult> Index()
     {
-        var ticket = await Madiatr.Send(new GetTicketByIdQuery { Id = 1 });
-
+        //var ticket = await Mediator.Send(new GetTicketByIdQuery { Id = 1 });
+        //await Mediator.Send(new AddTicketCommand { Name = "Ticket 1" });
         return View();
     }
 

@@ -5,6 +5,6 @@ namespace GymManager.UI.Controllers;
 
 public abstract class BaseController : Controller
 {
-    private ISender _mediatr;
-    protected ISender Madiatr => _mediatr ??= HttpContext.RequestServices.GetService<ISender>();
+    private ISender _mediator;
+    protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetService<ISender>();
 }
