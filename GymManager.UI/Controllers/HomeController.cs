@@ -1,32 +1,27 @@
-﻿using GymManager.UI.Models;
+﻿using GymManager.Application.Tickets.Queries.GetTicketById;
+using GymManager.UI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace GymManager.UI.Controllers
+namespace GymManager.UI.Controllers;
+
+public class HomeController : BaseController
 {
-    public class HomeController : Controller
+    public async Task<IActionResult> Index()
     {
-        private readonly ILogger<HomeController> _logger;
+        var ticket = await Madiatr.Send(new GetTicketByIdQuery { Id = 1 });
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        return View();
+    }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+    public IActionResult Privacy()
+    {
+        return View();
+    }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+    public IActionResult Error()
+    {
+        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
