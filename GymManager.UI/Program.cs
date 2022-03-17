@@ -1,10 +1,18 @@
 using GymManager.Application;
 using GymManager.Infrastructure;
+using GymManager.UI.Extensions;
+using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.ClearProviders();
+builder.Logging.SetMinimumLevel(LogLevel.Information);
+builder.Logging.AddNLogWeb();
+
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
+
+builder.Services.DefineVIewLocation(builder.Configuration);
 
 builder.Services.AddControllersWithViews();
 
