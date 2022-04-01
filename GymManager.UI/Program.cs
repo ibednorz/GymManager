@@ -1,6 +1,7 @@
 using GymManager.Application;
 using GymManager.Infrastructure;
 using GymManager.UI.Extensions;
+using GymManager.UI.Middlewares;
 using NLog.Web;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Logging.ClearProviders();
 builder.Logging.SetMinimumLevel(LogLevel.Information);
 builder.Logging.AddNLogWeb();
+
+builder.Services.AddCulture();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure();
@@ -25,6 +28,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
